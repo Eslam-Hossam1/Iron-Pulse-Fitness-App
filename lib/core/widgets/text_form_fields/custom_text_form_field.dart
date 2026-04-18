@@ -99,6 +99,8 @@ class CustomTextFormField extends StatelessWidget {
               )
             : null,
         isDense: true,
+        filled: true,
+        fillColor: backgroundColor ?? context.formColor,
         contentPadding:
             contentPadding ??
             EdgeInsets.symmetric(
@@ -111,10 +113,10 @@ class CustomTextFormField extends StatelessWidget {
         focusedErrorBorder: buildBorder(context, const Color(0xffFF2D1B)),
         errorBorder: buildBorder(context, const Color(0xffFF2D1B)),
         enabledBorder:
-            enabledBorder ?? buildBorder(context, context.outlineColor, 2),
+            enabledBorder ?? buildBorder(context, context.outlineColor, 1),
         hintStyle:
             hintStyle ??
-            AppTextStyles.regular14(
+            AppTextStyles.regular16(
               context,
             ).copyWith(color: context.secondaryTextColor),
         hintText: hintText,
@@ -132,10 +134,10 @@ class CustomTextFormField extends StatelessWidget {
   OutlineInputBorder buildBorder(
     BuildContext context,
     Color color, [
-    double width = 2,
+    double width = 1,
   ]) {
     return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(10.r(context)),
+      borderRadius: BorderRadius.circular(8.r(context)),
       borderSide: BorderSide(color: color, width: width),
     );
   }

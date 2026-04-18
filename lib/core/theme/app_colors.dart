@@ -19,12 +19,12 @@ abstract class AppColors {
   static const Color darkSecondary = Color(0xFFFE0017);
   static const Color darkOnSurfaceVariant = Color(0xFFB0BEC5);
   static const Color darkSurface = Color(0xFFA9A9A9);
-  static const Color darkOutline = Color(0xFF64748B);
+  static const Color darkOutline = Color(0xFF334155);
   static const Color darkScaffoldBackground = Color(0xFF101922);
   static const Color darkDialogBackground = Color(0xFF1E1E1E);
   static const Color darkMainTextColor = Color(0xFFF1F5F9);
   static const Color darkSecondaryTextColor = Color(0xFF94A3B8);
-  static const Color darkFormColor = Color(0xFF334155);
+  static const Color darkFormColor = Color(0xFF17212E);
   static const Color darkToastBackground = Color(0xFF2E2E2E);
   static const Color darkCachedNetworkImagePlacholderColor = Color(0xFF3A3A3A);
 }

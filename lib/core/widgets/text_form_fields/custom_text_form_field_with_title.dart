@@ -48,7 +48,7 @@ class CustomTextFormFieldWithTitle extends StatelessWidget {
                 context,
               ).copyWith(color: context.mainTextColor),
         ),
-        HeightSpace(height: 4),
+        HeightSpace(height: 8),
         CustomTextFormField(
           prefixIcon: prefixIcon,
           prefixSvgPath: prefixSvgPath,

@@ -1,7 +1,9 @@
+import 'package:fitness_app/core/utils/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:fitness_app/core/extensions/responsive_extension.dart';
 import 'package:fitness_app/core/theme/app_text_styles.dart';
 import 'package:fitness_app/core/theme/theme_colors_extension.dart';
+import 'package:flutter_svg/svg.dart';
 
 class ObscureTextFormField extends StatefulWidget {
   const ObscureTextFormField({
@@ -51,12 +53,14 @@ class _ObscureTextFormFieldState extends State<ObscureTextFormField> {
         constraints: BoxConstraints(),
         errorMaxLines: 2,
         isDense: true,
+        filled: true,
+        fillColor: context.formColor,
         contentPadding: EdgeInsets.symmetric(
           vertical: 13.h(context),
           horizontal: 12.w(context),
         ),
         hintText: widget.hintText,
-        hintStyle: AppTextStyles.regular14(
+        hintStyle: AppTextStyles.regular16(
           context,
         ).copyWith(color: context.secondaryTextColor),
         suffixIconConstraints: BoxConstraints(),
@@ -76,17 +80,23 @@ class _ObscureTextFormFieldState extends State<ObscureTextFormField> {
           ),
           child: IconButton(
             onPressed: toggleObscure,
-            icon: Icon(
-              isObscure ? Icons.visibility : Icons.visibility_off,
-              color: context.mainTextColor,
-              size: 24,
-            ),
+            icon: isObscure
+                ? SvgPicture.asset(
+                    Assets.imagesSvgsEye,
+                    fit: BoxFit.contain,
+                    width: 24.w(context),
+                  )
+                : Icon(
+                    Icons.visibility_off,
+                    color: context.mainTextColor,
+                    size: 24,
+                  ),
           ),
         ),
         focusedBorder: _buildBorder(context, context.primaryColor),
         focusedErrorBorder: _buildBorder(context, const Color(0xffFF2D1B)),
         errorBorder: _buildBorder(context, const Color(0xffFF2D1B)),
-        enabledBorder: _buildBorder(context, context.outlineColor, 2),
+        enabledBorder: _buildBorder(context, context.outlineColor, 1),
       ),
     );
   }
@@ -94,10 +104,10 @@ class _ObscureTextFormFieldState extends State<ObscureTextFormField> {
   OutlineInputBorder _buildBorder(
     BuildContext context,
     Color color, [
-    double width = 2,
+    double width = 1,
   ]) {
     return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(10.r(context)),
+      borderRadius: BorderRadius.circular(8.r(context)),
       borderSide: BorderSide(color: color, width: width),
     );
   }

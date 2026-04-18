@@ -33,7 +33,7 @@ class CustomPasswordTextFormFieldWithTitle extends StatelessWidget {
             context,
           ).copyWith(color: context.mainTextColor),
         ),
-        HeightSpace(height: 4),
+        HeightSpace(height: 8),
         ObscureTextFormField(
           hintText: hint,
           validator: validator ?? FormValidators.passwordValidator,
