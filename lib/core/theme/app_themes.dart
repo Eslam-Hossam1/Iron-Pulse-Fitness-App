@@ -1,8 +1,9 @@
 import 'package:fitness_app/core/theme/app_colors.dart';
+import 'package:fitness_app/core/theme/custom_colors.dart';
 import 'package:flutter/material.dart';
 
-class AppThemes {
-  static const String fontFamily = 'Lexend'; 
+abstract class AppThemes {
+  static const String fontFamily = 'Lexend';
 
   // ==============================
   // ☀️ LIGHT THEME
@@ -10,25 +11,32 @@ class AppThemes {
   static ThemeData get lightTheme {
     return ThemeData(
       brightness: Brightness.light,
+      fontFamily: fontFamily,
       scaffoldBackgroundColor: AppColors.lightScaffoldBackground,
       primaryColor: AppColors.lightPrimary,
-      fontFamily: fontFamily,
+      dialogBackgroundColor: AppColors.lightDialogBackground,
+      
+      // -- Color Scheme --
       colorScheme: const ColorScheme.light(
         primary: AppColors.lightPrimary,
         secondary: AppColors.lightSecondary,
         surface: AppColors.lightScaffoldBackground,
+        onSurfaceVariant: AppColors.lightOnSurfaceVariant,
         outline: AppColors.lightOutline,
       ),
-      
-      // --- Typography ---
-      textTheme: const TextTheme(
-        titleLarge: TextStyle(color: AppColors.lightMainTextColor, fontSize: 24, fontWeight: FontWeight.bold),
-        titleMedium: TextStyle(color: AppColors.lightMainTextColor, fontSize: 18, fontWeight: FontWeight.w600),
-        bodyLarge: TextStyle(color: AppColors.lightMainTextColor, fontSize: 16),
-        bodyMedium: TextStyle(color: AppColors.lightSecondaryTextColor, fontSize: 14),
-      ),
 
-      // --- Buttons ---
+      // -- Theme Extensions (السر هنا) --
+      extensions: const <ThemeExtension<dynamic>>[
+        CustomColors(
+          mainTextColor: AppColors.lightMainTextColor,
+          secondaryTextColor: AppColors.lightSecondaryTextColor,
+          formColor: AppColors.lightFormColor,
+          toastColor: AppColors.lightToastBackground,
+          cachedNetworkImagePlaceholderColor: AppColors.lightCachedNetworkImagePlacholderColor,
+        ),
+      ],
+
+      // -- UI Components Theme --
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.lightPrimary,
@@ -38,8 +46,6 @@ class AppThemes {
           elevation: 0,
         ),
       ),
-
-      // --- Text Fields (Forms) ---
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: AppColors.lightFormColor,
@@ -60,16 +66,6 @@ class AppThemes {
         prefixIconColor: AppColors.lightSecondaryTextColor,
         suffixIconColor: AppColors.lightSecondaryTextColor,
       ),
-
-      // --- Cards ---
-      cardTheme: CardThemeData(
-        color: AppColors.lightFormColor,
-        elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-          side: const BorderSide(color: AppColors.lightOutline, width: 0.5),
-        ),
-      ),
     );
   }
 
@@ -79,25 +75,32 @@ class AppThemes {
   static ThemeData get darkTheme {
     return ThemeData(
       brightness: Brightness.dark,
+      fontFamily: fontFamily,
       scaffoldBackgroundColor: AppColors.darkScaffoldBackground,
       primaryColor: AppColors.darkPrimary,
-      fontFamily: fontFamily,
+      dialogBackgroundColor: AppColors.darkDialogBackground,
+
+      // -- Color Scheme --
       colorScheme: const ColorScheme.dark(
         primary: AppColors.darkPrimary,
         secondary: AppColors.darkSecondary,
-        surface: AppColors.darkScaffoldBackground,
+        surface: AppColors.darkSurface, 
+        onSurfaceVariant: AppColors.darkOnSurfaceVariant,
         outline: AppColors.darkOutline,
       ),
 
-      // --- Typography ---
-      textTheme: const TextTheme(
-        titleLarge: TextStyle(color: AppColors.darkMainTextColor, fontSize: 24, fontWeight: FontWeight.bold),
-        titleMedium: TextStyle(color: AppColors.darkMainTextColor, fontSize: 18, fontWeight: FontWeight.w600),
-        bodyLarge: TextStyle(color: AppColors.darkMainTextColor, fontSize: 16),
-        bodyMedium: TextStyle(color: AppColors.darkSecondaryTextColor, fontSize: 14),
-      ),
+      // -- Theme Extensions (السر هنا) --
+      extensions: const <ThemeExtension<dynamic>>[
+        CustomColors(
+          mainTextColor: AppColors.darkMainTextColor,
+          secondaryTextColor: AppColors.darkSecondaryTextColor,
+          formColor: AppColors.darkFormColor,
+          toastColor: AppColors.darkToastBackground,
+          cachedNetworkImagePlaceholderColor: AppColors.darkCachedNetworkImagePlacholderColor,
+        ),
+      ],
 
-      // --- Buttons ---
+      // -- UI Components Theme --
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.darkPrimary,
@@ -107,8 +110,6 @@ class AppThemes {
           elevation: 0,
         ),
       ),
-
-      // --- Text Fields (Forms) ---
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: AppColors.darkFormColor,
@@ -128,16 +129,6 @@ class AppThemes {
         ),
         prefixIconColor: AppColors.darkSecondaryTextColor,
         suffixIconColor: AppColors.darkSecondaryTextColor,
-      ),
-
-      // --- Cards ---
-      cardTheme: CardThemeData(
-        color: AppColors.darkFormColor,
-        elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-          side: const BorderSide(color: AppColors.darkOutline, width: 0.5),
-        ),
       ),
     );
   }
