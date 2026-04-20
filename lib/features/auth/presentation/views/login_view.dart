@@ -1,4 +1,4 @@
-import 'package:fitness_app/features/auth/presentation/widgets/login_view_body.dart';
+import 'package:fitness_app/core/services/auth_servise/supabase_auth_servise.dart';
 import 'package:flutter/material.dart';
 
 class LoginView extends StatelessWidget {
@@ -6,6 +6,6 @@ class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: SafeArea(child: const LoginViewBody()));
+    return Scaffold(body: SafeArea(child: const AuthLogInManager()));
   }
 }
