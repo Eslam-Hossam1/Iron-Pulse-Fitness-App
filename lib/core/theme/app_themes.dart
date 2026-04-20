@@ -6,7 +6,6 @@ import 'custom_colors.dart';
 abstract class AppThemes {
   static final ThemeData lightTheme = ThemeData(
     fontFamily: 'Lexend',
-    dialogBackgroundColor: AppColors.lightDialogBackground,
     scaffoldBackgroundColor: AppColors.lightScaffoldBackground,
     brightness: Brightness.light,
     colorScheme: const ColorScheme.light(
@@ -25,11 +24,13 @@ abstract class AppThemes {
             AppColors.lightCachedNetworkImagePlacholderColor,
       ),
     ],
+    dialogTheme: DialogThemeData(
+      backgroundColor: AppColors.lightDialogBackground,
+    ),
   );
 
   static final ThemeData darkTheme = ThemeData(
     fontFamily: 'Lexend',
-    dialogBackgroundColor: AppColors.darkDialogBackground,
     scaffoldBackgroundColor: AppColors.darkScaffoldBackground,
     colorScheme: const ColorScheme.dark(
       primary: AppColors.darkPrimary,
@@ -49,5 +50,8 @@ abstract class AppThemes {
             AppColors.darkCachedNetworkImagePlacholderColor,
       ),
     ],
+    dialogTheme: DialogThemeData(
+      backgroundColor: AppColors.darkDialogBackground,
+    ),
   );
 }
