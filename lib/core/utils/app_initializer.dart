@@ -10,6 +10,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 class AppInitializer {
   static Future<void> initialize() async {
     await _setupDotEnv();
+    await setupSupaBase();
     await _initBlocObserverAndHydratedBloc();
     await _initServiceLocator();
   }

@@ -8,7 +8,8 @@ abstract class RoutePaths {
 
   // Shell branches
   static const home = "/home";
-  static const cart = "/cart";
+  static const trainers = "/trainers";
+  static const plans = "/plans";
   static const favorites = "/favorites";
   static const profile = "/profile";
 

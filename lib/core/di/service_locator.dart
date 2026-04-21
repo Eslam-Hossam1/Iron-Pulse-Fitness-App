@@ -4,11 +4,26 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../services/storage_services/preferences/preferences_service.dart';
 import '../services/storage_services/secure_storage/secure_storage_service.dart';
+import 'package:fitness_app/features/home/data/datasources/home_remote_data_source/home_remote_data_source.dart';
+import 'package:fitness_app/features/home/data/datasources/home_remote_data_source/home_remote_data_source_impl.dart';
+import 'package:fitness_app/features/home/data/repos/featured_plans_repo.dart';
+import 'package:fitness_app/features/home/data/repos/featured_plans_repo_impl.dart';
 
 final getIt = GetIt.instance;
 
 Future<void> setupServiceLocator() async {
   await _setupCaching();
+  _setupHome();
+}
+
+void _setupHome() {
+  getIt.registerLazySingleton<HomeRemoteDataSource>(
+    () => HomeRemoteDataSourceImpl(),
+  );
+
+  getIt.registerLazySingleton<FeaturedPlansRepo>(
+    () => FeaturedPlansRepoImpl(getIt<HomeRemoteDataSource>()),
+  );
 }
 
 Future<void> _setupCaching() async {
