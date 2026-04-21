@@ -10,6 +10,10 @@ class Assets {
   /// assets/images/pngs/image_placeholder.png
   static const String imagesPngsImagePlaceholder = "assets/images/pngs/image_placeholder.png";
 
+  /// Assets for imagesPngsLoginBody
+  /// assets/images/pngs/login_body.png
+  static const String imagesPngsLoginBody = "assets/images/pngs/login_body.png";
+
   /// Assets for imagesPngsOnboardingManRunning
   /// assets/images/pngs/onboarding_man_running.png
   static const String imagesPngsOnboardingManRunning = "assets/images/pngs/onboarding_man_running.png";
