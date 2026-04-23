@@ -1,5 +1,4 @@
 import 'package:fitness_app/features/auth/presentation/widgets/login_view_body.dart';
-import 'package:fitness_app/features/main/presentation/views/main_view.dart';
 import 'package:fitness_app/features/profile/presentation/views/edit_profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';

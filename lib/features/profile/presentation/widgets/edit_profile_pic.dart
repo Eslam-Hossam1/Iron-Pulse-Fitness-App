@@ -1,10 +1,19 @@
+import 'dart:io';
+import 'package:fitness_app/core/services/edit_image_profile_servise/upLoad_pic_to_subabase.dart';
 import 'package:fitness_app/core/theme/app_colors.dart';
 import 'package:fitness_app/core/utils/assets.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
-class EditProfilePic extends StatelessWidget {
+class EditProfilePic extends StatefulWidget {
   const EditProfilePic({super.key});
 
+  @override
+  State<EditProfilePic> createState() => _EditProfilePicState();
+}
+
+class _EditProfilePicState extends State<EditProfilePic> {
+  File? selectedImage;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -22,20 +31,24 @@ class EditProfilePic extends StatelessWidget {
                     CircleAvatar(
                       radius: avatarRadius,
                       backgroundColor: AppColors.darkOutline,
-                      child: CircleAvatar(
-                        radius: constraints.maxWidth * 0.25,
-                        child: Image.asset(
-                          Assets.imagesPngsProfilePicture,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
+                      backgroundImage: selectedImage != null
+                          ? FileImage(selectedImage!)
+                          : AssetImage(Assets.imagesPngsProfilePicture)
+                                as ImageProvider,
                     ),
                     Positioned(
                       bottom: constraints.maxWidth * 0.02,
                       right: constraints.maxWidth * 0.02,
                       child: InkWell(
-                        onTap: () {
-                          // edit pic code
+                        onTap: () async {
+                          selectedImage = await pickImageFromGallery();
+                          setState(() {});
+
+                          if (selectedImage != null) {
+                            final url = await uploadImageToSupabase(
+                              selectedImage!,
+                            );
+                          }
                         },
                         child: CircleAvatar(
                           radius: iconRadius,
@@ -57,4 +70,12 @@ class EditProfilePic extends StatelessWidget {
       ),
     );
   }
+}
+
+Future<File?> pickImageFromGallery() async {
+  final picker = ImagePicker();
+  final XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+  if (pickedFile == null) return null;
+  return File(pickedFile.path);
 }
