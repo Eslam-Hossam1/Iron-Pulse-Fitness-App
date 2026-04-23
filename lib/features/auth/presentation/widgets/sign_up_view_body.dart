@@ -1,8 +1,12 @@
 import 'package:fitness_app/core/routing/routes_paths.dart';
+import 'package:fitness_app/core/utils/app_regex.dart';
 import 'package:fitness_app/core/utils/assets.dart';
 import 'package:fitness_app/core/widgets/buttons/custom_elevated_button.dart';
 import 'package:fitness_app/core/widgets/text_form_fields/custom_text_form.dart';
+import 'package:fitness_app/core/widgets/toast/show_toast.dart';
+import 'package:fitness_app/features/auth/presentation/view_model/sign_up_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
@@ -71,6 +75,14 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                         controller: _emailController,
                         keyboardType: TextInputType.name,
                         hintText: 'Enter your Email',
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Email is required';
+                          } else if (!AppRegex.isValidEmail(value)) {
+                            return 'Enter a valid email';
+                          }
+                          return null;
+                        },
                       ),
                     ),
                     textFieldTitle(text: ' Password'),
@@ -93,19 +105,52 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                           ),
                         ),
                         obscureText: !_isPasswordVisible,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Password is required';
+                          } else if (!AppRegex.isPasswordValid(value)) {
+                            return 'Min 8 chars, upper, lower, number & symbol';
+                          }
+                          return null;
+                        },
                       ),
                     ),
                   ],
                 ),
               ),
               SizedBox(height: 10.h),
-              CustomElevatedButton(
-                onPressed: () {},
-                text: 'Create Account',
-                width: double.infinity,
-                height: 50.h,
-                backgroundColor: Color(0xFF0D7FF2),
-                textColor: Colors.white,
+              BlocConsumer<SignUpCubit, SignUpState>(
+                listener: (context, state) {
+                  if (state is SignUpSuccess) {
+                    context.go(RoutePaths.login);
+                    ShowToast.showToastSuccessTop(message: 'Account Created');
+                  } else if (state is SignUpFailure) {
+                    ShowToast.showToastErrorTop(message: state.message);
+                  }
+                },
+                builder: (context, state) {
+                  final isLoading = state is SignUpLoading;
+
+                  return CustomElevatedButton(
+                    onPressed: isLoading
+                        ? () {}
+                        : () {
+                            if (_formKey.currentState!.validate()) {
+                              context.read<SignUpCubit>().signUp(
+                                name: _nameController.text,
+                                email: _emailController.text.trim(),
+                                password: _passwordController.text,
+                              );
+                            }
+                          },
+                    text: isLoading ? 'Loading...' : 'Create Account',
+                    width: double.infinity,
+                    height: 50.h,
+                    backgroundColor: Color(0xFF0D7FF2),
+                    textColor: Colors.white,
+                    // isLoading: state is SignUpLoading,
+                  );
+                },
               ),
               SizedBox(height: 15.h),
               DividerOR(),

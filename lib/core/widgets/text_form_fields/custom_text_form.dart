@@ -41,13 +41,14 @@ class CustomTextForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      cursorColor: const Color(0xFF212121),
+      cursorColor: const Color(0xFFFFFFFF),
       style: TextStyle(
         fontSize: 16.sp,
         fontWeight: FontWeight.w500,
-        color: const Color(0xFF001640),
+        color: const Color(0xFFFFFFFF),
       ),
       validator: (value) {
+        if (validator == null) return null;
         return validator!(value);
       },
       onChanged: onChanged,
@@ -66,10 +67,7 @@ class CustomTextForm extends StatelessWidget {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
-          borderSide: const BorderSide(
-            color: Color(0xFF2563EB),
-            width: 2,
-          ),
+          borderSide: const BorderSide(color: Color(0xFF2563EB), width: 2),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
@@ -89,15 +87,8 @@ class CustomTextForm extends StatelessWidget {
         prefixIcon: prefixIcon,
         hintText: hintText,
         hintStyle:
-            hintStyle ??
-            TextStyle(
-              fontSize: 14.sp,
-              color: Colors.white38,
-            ),
-        errorStyle:TextStyle(
-              fontSize: 12.sp,
-              color: Colors.red,
-            ) ,
+            hintStyle ?? TextStyle(fontSize: 14.sp, color: Colors.white38),
+        errorStyle: TextStyle(fontSize: 12.sp, color: Colors.red),
       ),
     );
   }
