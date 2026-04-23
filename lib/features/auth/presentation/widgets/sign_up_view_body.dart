@@ -146,7 +146,9 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                     text: isLoading ? 'Loading...' : 'Create Account',
                     width: double.infinity,
                     height: 50.h,
-                    backgroundColor: Color(0xFF0D7FF2),
+                    backgroundColor: isLoading
+                        ? Colors.grey.withValues(alpha: 0.5)
+                        : Color(0xFF0D7FF2),
                     textColor: Colors.white,
                     // isLoading: state is SignUpLoading,
                   );
