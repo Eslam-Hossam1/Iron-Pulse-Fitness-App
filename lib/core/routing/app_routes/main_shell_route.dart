@@ -6,6 +6,8 @@ import 'package:fitness_app/features/main/presentation/views/main_view.dart';
 import 'package:fitness_app/features/home/presentation/views/home_view.dart';
 import 'package:fitness_app/core/widgets/custom_screen_placeholder.dart';
 import 'package:fitness_app/features/home/presentation/manager/featured_plans_cubit/featured_plans_cubit.dart';
+import 'package:fitness_app/features/favorites/presentation/manager/favorites_cubit/favorites_cubit.dart';
+import 'package:fitness_app/features/favorites/presentation/views/favorites_view.dart';
 import 'package:fitness_app/core/di/service_locator.dart';
 import 'package:fitness_app/features/home/data/repos/featured_plans_repo.dart';
 
@@ -18,7 +20,10 @@ class MainShellRoute {
 
   static StatefulShellRoute mainShellRoute = StatefulShellRoute.indexedStack(
     builder: (context, state, navigationShell) {
-      return MainView(navigationShell: navigationShell);
+      return BlocProvider.value(
+        value: getIt<FavoritesCubit>()..getFavorites(),
+        child: MainView(navigationShell: navigationShell),
+      );
     },
     branches: [
       StatefulShellBranch(
@@ -56,7 +61,7 @@ class MainShellRoute {
         routes: [
           GoRoute(
             path: RoutePaths.favorites,
-            builder: (context, state) => const CustomScreenPlaceholder(text: 'Favorites Screen'),
+            builder: (context, state) => const FavoritesView(),
           ),
         ],
       ),
