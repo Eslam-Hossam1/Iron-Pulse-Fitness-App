@@ -29,18 +29,21 @@ class AuthLogInManager extends StatelessWidget {
       builder: (context, snapshot) {
         // loading
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Scaffold(body: Center(child: CircularProgressIndicator()));
+          return const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
         }
-        // checking in authentication
+        // checking authentication
         final session = snapshot.hasData ? snapshot.data!.session : null;
         if (session != null) {
-          // conflict add home view name
           WidgetsBinding.instance.addPostFrameCallback((_) {
             context.go(RoutePaths.home);
           });
-          return Scaffold(body: Center(child: CircularProgressIndicator()));
+          return const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
         } else {
-          return LoginViewBody();
+          return const LoginViewBody();
         }
       },
     );

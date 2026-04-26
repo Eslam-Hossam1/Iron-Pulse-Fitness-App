@@ -23,6 +23,10 @@ class Assets {
   static const String imagesPngsOnboardingManRunning =
       "assets/images/pngs/onboarding_man_running.png";
 
+  /// Assets for imagesPngsProfilePicture
+  /// assets/images/pngs/Profile_Picture.png
+  static const String imagesPngsProfilePicture = "assets/images/pngs/Profile_Picture.png";
+
   /// Assets for imagesPngsSplashDumble
   /// assets/images/pngs/splash_dumble.png
   static const String imagesPngsSplashDumble =
@@ -85,4 +89,16 @@ class Assets {
   /// Assets for imagesSvgsProfile
   /// assets/images/svgs/profile.svg
   static const String imagesSvgsProfile = "assets/images/svgs/profile.svg";
+
+  /// Assets for imagesSvgsBrokenHeart
+  /// assets/images/svgs/broken_heart.svg
+  static const String imagesSvgsBrokenHeart = "assets/images/svgs/broken_heart.svg";
+
+  /// Assets for imagesPngsBrokenHeartIconContainer
+  /// assets/images/pngs/broken_heart_icon_container.png
+  static const String imagesPngsBrokenHeartIconContainer = "assets/images/pngs/broken_heart_icon_container.png";
+
+  /// Assets for imagesSvgsBrowseMoreIcon
+  /// assets/images/svgs/browse_more_icon.svg
+  static const String imagesSvgsBrowseMoreIcon = "assets/images/svgs/browse_more_icon.svg";
 }
