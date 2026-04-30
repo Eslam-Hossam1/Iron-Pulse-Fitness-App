@@ -7,7 +7,7 @@ class ProfileService {
     final user = client.auth.currentUser;
 
     return {
-      "name": user?.userMetadata?['name'] ?? '',
+      "display_name": user?.userMetadata?['display_name'] ?? '',
       "email": user?.email ?? '',
     };
   }

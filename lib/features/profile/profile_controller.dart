@@ -10,7 +10,7 @@ class ProfileController {
 
   void loadUser() {
     final data = service.getUserData();
-    name = data['name']!;
+    name = data['display_name']!;
     email = data['email']!;
   }
 

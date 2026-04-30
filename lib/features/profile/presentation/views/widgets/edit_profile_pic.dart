@@ -1,19 +1,21 @@
 import 'dart:io';
-import 'package:fitness_app/core/services/edit_image_profile_servise/upLoad_pic_to_subabase.dart';
 import 'package:fitness_app/core/theme/app_colors.dart';
 import 'package:fitness_app/core/utils/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-class EditProfilePic extends StatefulWidget {
-  const EditProfilePic({super.key});
+class EditProfilePic extends StatelessWidget {
+  final File? selectedImage;
+  final String? initialImageUrl;
+  final ValueChanged<File?> onImageSelected;
 
-  @override
-  State<EditProfilePic> createState() => _EditProfilePicState();
-}
+  const EditProfilePic({
+    super.key,
+    required this.selectedImage,
+    this.initialImageUrl,
+    required this.onImageSelected,
+  });
 
-class _EditProfilePicState extends State<EditProfilePic> {
-  File? selectedImage;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -28,27 +30,25 @@ class _EditProfilePicState extends State<EditProfilePic> {
                 final iconRadius = constraints.maxWidth * 0.06;
                 return Stack(
                   children: [
-                    CircleAvatar(
-                      radius: avatarRadius,
-                      backgroundColor: AppColors.darkOutline,
-                      backgroundImage: selectedImage != null
-                          ? FileImage(selectedImage!)
-                          : AssetImage(Assets.imagesPngsProfilePicture)
-                                as ImageProvider,
+                    Container(
+                      width: avatarRadius * 2,
+                      height: avatarRadius * 2,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: AppColors.darkOutline,
+                        border: Border.all(color: AppColors.darkOutline, width: 2),
+                      ),
+                      child: ClipOval(
+                        child: _buildImage(),
+                      ),
                     ),
                     Positioned(
-                      bottom: constraints.maxWidth * 0.02,
-                      right: constraints.maxWidth * 0.02,
+                      bottom: 8,
+                      right: 8,
                       child: InkWell(
                         onTap: () async {
-                          selectedImage = await pickImageFromGallery();
-                          setState(() {});
-
-                          if (selectedImage != null) {
-                            final url = await uploadImageToSupabase(
-                              selectedImage!,
-                            );
-                          }
+                          final image = await pickImageFromGallery();
+                          onImageSelected(image);
                         },
                         child: CircleAvatar(
                           radius: iconRadius,
@@ -68,6 +68,27 @@ class _EditProfilePicState extends State<EditProfilePic> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildImage() {
+    if (selectedImage != null) {
+      return Image.file(selectedImage!, fit: BoxFit.cover);
+    }
+    if (initialImageUrl != null) {
+      return Image.network(
+        initialImageUrl!,
+        fit: BoxFit.cover,
+        errorBuilder: (context, error, stackTrace) => _buildPlaceholder(),
+      );
+    }
+    return _buildPlaceholder();
+  }
+
+  Widget _buildPlaceholder() {
+    return Image.asset(
+      Assets.imagesPngsDefaultProfile,
+      fit: BoxFit.cover,
     );
   }
 }

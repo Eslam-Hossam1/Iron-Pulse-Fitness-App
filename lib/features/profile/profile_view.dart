@@ -1,9 +1,15 @@
+import 'package:fitness_app/core/routing/routes_paths.dart';
+import 'package:fitness_app/core/services/edit_image_profile_servise/get_image_url.dart';
+import 'package:fitness_app/features/profile/presentation/views/edit_profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'profile_controller.dart';
 import 'package:fitness_app/core/widgets/buttons/custom_button.dart';
-import 'package:lib/features/profile/presentation/views/edit_profile_view.dart';
+
+
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -14,6 +20,8 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   final controller = GetIt.instance<ProfileController>();
+  final user = Supabase.instance.client.auth.currentUser;
+  String? currentImageUrl;
 
   @override
   void initState() {
@@ -46,45 +54,77 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child: Column(
           children: [
             const SizedBox(height: 20),
-            Center(
-              child: Stack(
-                alignment: Alignment.bottomRight,
-                children: [
-                  Container(
-                    width: 110,
-                    height: 110,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Color(0xff151F29),
-                    ),
-                    child: ClipOval(
-                      child: SvgPicture.asset(
-                        'assets/images/svgs/profile.svg',
-                        fit: BoxFit.cover,
+            Column(
+              children: [
+                Center(
+                  child: Stack(
+                    alignment: Alignment.bottomRight,
+                    children: [
+                      // profile image from supabase;
+                      StreamBuilder<String?>(
+                        stream: getProfileImageStream(user!.id),
+                        builder: (context, snapshot) {
+                          currentImageUrl = snapshot.data;
+                          controller.loadUser();
+                          final imageUrl = snapshot.data;
+                          if (imageUrl == null) {
+                            return Container(
+                              width: 120,
+                              height: 120,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Color(0xff151F29),
+                              ),
+                              child: ClipOval(
+                                child: SvgPicture.asset(
+                                  'assets/images/svgs/profile.svg',
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            );
+                          }
+                          return Container(
+                            width: 120,
+                            height: 120,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: const Color(0xff151F29),
+                              image: DecorationImage(
+                                image: NetworkImage(snapshot.data!),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          );
+                        },
                       ),
-                    ),
+                      Container(
+                        height: 30,
+                        width: 30,
+                        decoration: const BoxDecoration(
+                          color: Color(0xff1877F2),
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          Icons.edit,
+                          size: 16,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
                   ),
-                  Container(
-                    height: 30,
-                    width: 30,
-                    decoration: const BoxDecoration(
-                      color: Color(0xff1877F2),
-                      shape: BoxShape.circle,
-                    ),
-                    child: const Icon(Icons.edit, size: 16, color: Colors.white),
+                ),
+                const SizedBox(height: 15),
+                Text(
+                  controller.name,
+                  style: const TextStyle(
+                    fontSize: 22,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            const SizedBox(height: 15),
-            Text(
-              controller.name,
-              style: const TextStyle(
-                fontSize: 22,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+
             Text(
               controller.email,
               style: TextStyle(color: Colors.grey.shade500, fontSize: 14),
@@ -92,16 +132,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
             const SizedBox(height: 20),
             CustomButton(
               width: 160,
-              height: 45,
+              height: 56,
               backgroundColor: const Color(0xff1877F2),
               borderRadius: 10,
-              onPressed: () {
-                Navigator.push(
+              onPressed: () async {
+                await Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const EditProfileView(),
+                    builder: (context) => EditProfileView(
+                      initialImageUrl: currentImageUrl,
+                    ),
                   ),
                 );
+                if (mounted) {
+                  setState(() {
+                    controller.loadUser();
+                  });
+                }
               },
               child: const Text(
                 "Edit Profile",
@@ -126,9 +173,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Text(
                 "Account Settings",
                 style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold),
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             const SizedBox(height: 15),
@@ -151,7 +199,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
             _buildSettingItem(
               icon: Icons.logout,
               title: "Sign Out",
-              onTap: () async => await controller.logout(),
+              onTap: () async {
+                await controller.logout();
+                if (context.mounted) {
+                  context.go(RoutePaths.login);
+                }
+              },
               iconColor: Colors.red.shade400,
               isExit: true,
             ),
@@ -178,15 +231,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Text(
               title,
               style: TextStyle(
-                  color: Colors.grey.shade400, fontSize: 13, height: 1.2),
+                color: Colors.grey.shade400,
+                fontSize: 13,
+                height: 1.2,
+              ),
             ),
             const SizedBox(height: 8),
             Text(
               value,
               style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold),
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ],
         ),
