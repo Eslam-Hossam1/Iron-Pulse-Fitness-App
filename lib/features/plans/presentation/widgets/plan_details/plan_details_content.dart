@@ -6,6 +6,7 @@ import 'package:fitness_app/features/plans/presentation/widgets/plan_details/day
 import 'package:flutter/material.dart' hide Chip;
 import 'package:fitness_app/core/extensions/responsive_extension.dart';
 import 'package:fitness_app/core/theme/app_text_styles.dart';
+import 'package:fitness_app/core/widgets/custom_cached_network_image.dart';
 import 'package:go_router/go_router.dart';
 
 class PlanDetailsContent extends StatefulWidget {
@@ -45,17 +46,9 @@ class _PlanDetailsContentState extends State<PlanDetailsContent> {
             background: Stack(
               fit: StackFit.expand,
               children: [
-                Image.network(
-                  plan.image,
+                CustomCachedNetworkImage(
+                  url: plan.image,
                   fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) => Container(
-                    color: const Color(0xFF1E1E2E),
-                    child: const Icon(
-                      Icons.image_not_supported_outlined,
-                      color: Colors.grey,
-                      size: 40,
-                    ),
-                  ),
                 ),
                 const DecoratedBox(
                   decoration: BoxDecoration(

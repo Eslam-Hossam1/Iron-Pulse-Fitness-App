@@ -2,6 +2,7 @@ import 'package:fitness_app/features/plans/data/models/plans_model.dart';
 import 'package:flutter/material.dart';
 import 'package:fitness_app/core/extensions/responsive_extension.dart';
 import 'package:fitness_app/core/theme/app_text_styles.dart';
+import 'package:fitness_app/core/widgets/custom_cached_network_image.dart';
 
 class PlanCard extends StatelessWidget {
   const PlanCard({super.key, required this.plan, required this.onTap});
@@ -28,7 +29,7 @@ class PlanCard extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: const Color(0xFF1E1E2E),
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(16.r(context)),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,50 +37,24 @@ class PlanCard extends StatelessWidget {
             Stack(
               children: [
                 ClipRRect(
-                  borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-                  child: Image.network(
-                    plan.image,
-                    height: 180,
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(16.r(context))),
+                  child: CustomCachedNetworkImage(
+                    url: plan.image,
+                    height: 180.h(context),
                     width: double.infinity,
                     fit: BoxFit.cover,
-                    loadingBuilder: (context, child, loadingProgress) {
-                      if (loadingProgress == null) return child;
-                      return Container(
-                        height: 180,
-                        color: const Color(0xFF1E1E2E),
-                        child: Center(
-                          child: CircularProgressIndicator(
-                            value: loadingProgress.expectedTotalBytes != null
-                                ? loadingProgress.cumulativeBytesLoaded /
-                                      loadingProgress.expectedTotalBytes!
-                                : null,
-                          ),
-                        ),
-                      );
-                    },
-                    errorBuilder: (context, error, stackTrace) {
-                      return Container(
-                        height: 180,
-                        color: const Color(0xFF1E1E2E),
-                        child: const Center(
-                          child: Icon(
-                            Icons.image_not_supported_outlined,
-                            color: Colors.grey,
-                            size: 40,
-                          ),
-                        ),
-                      );
-                    },
+                    // Optimizing memory by matching cache size to display height
+                    memCacheHeight: 180.h(context).toInt(),
                   ),
                 ),
                 Positioned(
-                  top: 12,
-                  right: 12,
+                  top: 12.h(context),
+                  right: 12.w(context),
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    padding: EdgeInsets.symmetric(horizontal: 10.w(context), vertical: 4.h(context)),
                     decoration: BoxDecoration(
                       color: _getLevelColor(plan.level),
-                      borderRadius: BorderRadius.circular(6),
+                      borderRadius: BorderRadius.circular(6.r(context)),
                     ),
                     child: Text(
                       plan.level.toUpperCase(),
@@ -108,7 +83,7 @@ class PlanCard extends StatelessWidget {
                       Row(
                         children: [
                           const Icon(Icons.star, size: 14, color: Colors.amber),
-                          const SizedBox(width: 2),
+                          SizedBox(width: 2.w(context)),
                           Text(
                             plan.rating.toString(),
                             style: AppTextStyles.regular13(context, color: Colors.grey),
@@ -125,18 +100,18 @@ class PlanCard extends StatelessWidget {
                         size: 14,
                         color: Colors.grey,
                       ),
-                      const SizedBox(width: 4),
+                      SizedBox(width: 4.w(context)),
                       Text(
                         '${plan.durationWeeks} Weeks',
                         style: AppTextStyles.regular13(context, color: Colors.grey),
                       ),
-                      const SizedBox(width: 16),
+                      SizedBox(width: 16.w(context)),
                       const Icon(
                         Icons.access_time_outlined,
                         size: 14,
                         color: Colors.grey,
                       ),
-                      const SizedBox(width: 4),
+                      SizedBox(width: 4.w(context)),
                       Text(
                         '${plan.minutesPerDay} Min/Day',
                         style: AppTextStyles.regular13(context, color: Colors.grey),
