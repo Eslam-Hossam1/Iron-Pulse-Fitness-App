@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:fitness_app/core/routing/routes_paths.dart';
 import 'package:fitness_app/core/services/edit_image_profile_servise/get_image_url.dart';
 import 'package:fitness_app/features/profile/presentation/views/edit_profile_view.dart';
@@ -32,7 +31,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    log('user id : ${user?.id}');
     return Scaffold(
       backgroundColor: const Color(0xff0B121A),
       appBar: AppBar(
@@ -68,7 +66,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         builder: (context, snapshot) {
                           currentImageUrl = snapshot.data;
                           controller.loadUser();
-                          log('snapshot : ${snapshot.data}');
                           final imageUrl = snapshot.data;
                           if (imageUrl == null) {
                             return Container(
