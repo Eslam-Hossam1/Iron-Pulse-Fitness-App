@@ -10,7 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class EditProfileViewBody extends StatefulWidget {
-  const EditProfileViewBody({super.key});
+  final String? initialImageUrl;
+  const EditProfileViewBody({super.key, this.initialImageUrl});
 
   @override
   State<EditProfileViewBody> createState() => _EditProfileViewBodyState();
@@ -22,6 +23,14 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
   String originalName = "";
   File? selectedImage;
   @override
+  void initState() {
+    super.initState();
+    final user = Supabase.instance.client.auth.currentUser;
+    originalName = user?.userMetadata?['display_name'] ?? "";
+    nameController.text = originalName;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -32,6 +41,7 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
             children: [
               EditProfilePic(
                 selectedImage: selectedImage,
+                initialImageUrl: widget.initialImageUrl,
                 onImageSelected: (File? image) {
                   setState(() => selectedImage = image);
                 },
@@ -57,10 +67,30 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
               CustomButton(
                 width: double.infinity,
                 onPressed: () async {
-                  await upDateName(context);
+                  bool isNameChanged = originalName != nameController.text.trim();
+                  bool isImageChanged = selectedImage != null;
 
-                  await upDateProfilePic(context);
-                  setState(() {});
+                  if (!isNameChanged && !isImageChanged) {
+                    Navigator.pop(context);
+                    return;
+                  }
+
+                  if (isNameChanged) {
+                    await updateDisplayName();
+                  }
+
+                  if (isImageChanged) {
+                    await uploadImageToSupabase(selectedImage!);
+                  }
+
+                  if (mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text("Profile updated successfully ✅")),
+                    );
+                    Future.delayed(const Duration(seconds: 1), () {
+                      if (mounted) Navigator.pop(context);
+                    });
+                  }
                 },
                 child: Text(
                   'Save Changes',
@@ -92,43 +122,6 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
         ),
       ),
     );
-  }
-
-  Future<void> upDateProfilePic(BuildContext context) async {
-    try {
-      if (selectedImage != null) {
-        await uploadImageToSupabase(selectedImage!);
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Profile picture updated successfully ✅")),
-        );
-        Future.delayed(Duration(seconds: 3), () {
-          Navigator.pop(context);
-        });
-      }
-    } catch (e) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text("Something went wrong ❌")));
-    }
-  }
-
-  Future<void> upDateName(BuildContext context) async {
-    try {
-      if (originalName != nameController.text.trim()) {
-        await updateDisplayName();
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text("Name updated successfully ✅")));
-        Future.delayed(Duration(seconds: 3), () {
-          Navigator.pop(context);
-        });
-      }
-    } catch (e) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text("Something went wrong ❌")));
-    }
   }
 
   Future<bool> updateDisplayName() async {

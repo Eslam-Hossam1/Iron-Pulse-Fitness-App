@@ -6,11 +6,13 @@ import 'package:image_picker/image_picker.dart';
 
 class EditProfilePic extends StatelessWidget {
   final File? selectedImage;
+  final String? initialImageUrl;
   final ValueChanged<File?> onImageSelected;
 
   const EditProfilePic({
     super.key,
     required this.selectedImage,
+    this.initialImageUrl,
     required this.onImageSelected,
   });
 
@@ -28,17 +30,21 @@ class EditProfilePic extends StatelessWidget {
                 final iconRadius = constraints.maxWidth * 0.06;
                 return Stack(
                   children: [
-                    CircleAvatar(
-                      radius: avatarRadius,
-                      backgroundColor: AppColors.darkOutline,
-                      backgroundImage: selectedImage != null
-                          ? FileImage(selectedImage!)
-                          : AssetImage(Assets.imagesPngsProfilePicture)
-                                as ImageProvider,
+                    Container(
+                      width: avatarRadius * 2,
+                      height: avatarRadius * 2,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: AppColors.darkOutline,
+                        border: Border.all(color: AppColors.darkOutline, width: 2),
+                      ),
+                      child: ClipOval(
+                        child: _buildImage(),
+                      ),
                     ),
                     Positioned(
-                      bottom: constraints.maxWidth * 0.02,
-                      right: constraints.maxWidth * 0.02,
+                      bottom: 8,
+                      right: 8,
                       child: InkWell(
                         onTap: () async {
                           final image = await pickImageFromGallery();
@@ -62,6 +68,27 @@ class EditProfilePic extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildImage() {
+    if (selectedImage != null) {
+      return Image.file(selectedImage!, fit: BoxFit.cover);
+    }
+    if (initialImageUrl != null) {
+      return Image.network(
+        initialImageUrl!,
+        fit: BoxFit.cover,
+        errorBuilder: (context, error, stackTrace) => _buildPlaceholder(),
+      );
+    }
+    return _buildPlaceholder();
+  }
+
+  Widget _buildPlaceholder() {
+    return Image.asset(
+      Assets.imagesPngsDefaultProfile,
+      fit: BoxFit.cover,
     );
   }
 }

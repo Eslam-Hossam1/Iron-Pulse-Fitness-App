@@ -2,7 +2,8 @@ import 'package:fitness_app/features/profile/presentation/views/widgets/edit_pro
 import 'package:flutter/material.dart';
 
 class EditProfileView extends StatelessWidget {
-  const EditProfileView({super.key});
+  final String? initialImageUrl;
+  const EditProfileView({super.key, this.initialImageUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class EditProfileView extends StatelessWidget {
         centerTitle: true,
         title: Text('Edit Profile'),
       ),
-      body: EditProfileViewBody(),
+      body: EditProfileViewBody(initialImageUrl: initialImageUrl),
     );
   }
 }
