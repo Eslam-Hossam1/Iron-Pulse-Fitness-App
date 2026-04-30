@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fitness_app/core/extensions/responsive_extension.dart';
 
 class CustomTextForm extends StatelessWidget {
   const CustomTextForm({
@@ -43,7 +43,7 @@ class CustomTextForm extends StatelessWidget {
       controller: controller,
       cursorColor: const Color(0xFFFFFFFF),
       style: TextStyle(
-        fontSize: 16.sp,
+        fontSize: 16.r(context),
         fontWeight: FontWeight.w500,
         color: const Color(0xFFFFFFFF),
       ),
@@ -61,8 +61,8 @@ class CustomTextForm extends StatelessWidget {
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
           borderSide: BorderSide(
-            color: Colors.white.withValues(alpha: 0.1),
-            width: 2.w,
+            color: Colors.white.withOpacity(0.1),
+            width: 2.w(context),
           ),
         ),
         focusedBorder: OutlineInputBorder(
@@ -87,8 +87,8 @@ class CustomTextForm extends StatelessWidget {
         prefixIcon: prefixIcon,
         hintText: hintText,
         hintStyle:
-            hintStyle ?? TextStyle(fontSize: 14.sp, color: Colors.white38),
-        errorStyle: TextStyle(fontSize: 12.sp, color: Colors.red),
+            hintStyle ?? TextStyle(fontSize: 14.r(context), color: Colors.white38),
+        errorStyle: TextStyle(fontSize: 12.r(context), color: Colors.red),
       ),
     );
   }

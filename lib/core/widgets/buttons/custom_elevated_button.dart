@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fitness_app/core/extensions/responsive_extension.dart';
 
 class CustomElevatedButton extends StatelessWidget {
   const CustomElevatedButton({
@@ -52,7 +52,7 @@ class CustomElevatedButton extends StatelessWidget {
           text,
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            fontSize: 16.sp,
+            fontSize: 16.r(context),
             color: textColor ?? Colors.white,
           ),
         ),
