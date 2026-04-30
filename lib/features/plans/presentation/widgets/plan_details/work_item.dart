@@ -1,6 +1,7 @@
 import 'package:fitness_app/features/plans/data/models/plan_step_model.dart';
 import 'package:flutter/material.dart';
 import 'package:fitness_app/core/extensions/responsive_extension.dart';
+import 'package:fitness_app/core/theme/app_text_styles.dart';
 
 class WorkoutItem extends StatelessWidget {
   const WorkoutItem({super.key, required this.workout});
@@ -31,14 +32,11 @@ class WorkoutItem extends StatelessWidget {
             children: [
               Text(
                 workout.workoutName,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14.r(context),
-                ),
+                style: AppTextStyles.bold14(context, color: Colors.white),
               ),
               Text(
                 '${workout.duration} sets × ${workout.reps} reps',
-                style: TextStyle(color: Colors.grey, fontSize: 12.r(context)),
+                style: AppTextStyles.regular12(context, color: Colors.grey),
               ),
             ],
           ),

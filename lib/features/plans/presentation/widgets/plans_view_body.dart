@@ -28,7 +28,6 @@ class PlansViewBody extends StatelessWidget {
               'Find Your Plan',
               style: AppTextStyles.bold24(context).copyWith(
                 color: context.mainTextColor,
-                fontSize: 30.r(context),
               ),
             ),
           ),

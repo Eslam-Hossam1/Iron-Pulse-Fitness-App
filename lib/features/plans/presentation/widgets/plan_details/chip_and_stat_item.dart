@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fitness_app/core/extensions/responsive_extension.dart';
+import 'package:fitness_app/core/theme/app_text_styles.dart';
 
 class Chip extends StatelessWidget {
   const Chip({super.key, required this.label, required this.color});
@@ -17,11 +18,7 @@ class Chip extends StatelessWidget {
       ),
       child: Text(
         label,
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 11.r(context),
-          fontWeight: FontWeight.bold,
-        ),
+        style: AppTextStyles.bold10(context, color: Colors.white),
       ),
     );
   }
@@ -55,7 +52,7 @@ class StatItem extends StatelessWidget {
           SizedBox(height: 8.h(context)),
           Text(
             label,
-            style: TextStyle(color: Colors.grey, fontSize: 12.r(context)),
+            style: AppTextStyles.medium12(context, color: Colors.grey),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
@@ -64,7 +61,7 @@ class StatItem extends StatelessWidget {
             fit: BoxFit.scaleDown,
             child: Text(
               value,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.r(context)),
+              style: AppTextStyles.bold14(context, color: Colors.white),
             ),
           ),
         ],

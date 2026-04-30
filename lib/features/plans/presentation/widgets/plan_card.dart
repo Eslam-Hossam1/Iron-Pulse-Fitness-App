@@ -1,6 +1,7 @@
 import 'package:fitness_app/features/plans/data/models/plans_model.dart';
 import 'package:flutter/material.dart';
 import 'package:fitness_app/core/extensions/responsive_extension.dart';
+import 'package:fitness_app/core/theme/app_text_styles.dart';
 
 class PlanCard extends StatelessWidget {
   const PlanCard({super.key, required this.plan, required this.onTap});
@@ -82,11 +83,7 @@ class PlanCard extends StatelessWidget {
                     ),
                     child: Text(
                       plan.level.toUpperCase(),
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 11,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: AppTextStyles.bold10(context, color: Colors.white),
                     ),
                   ),
                 ),
@@ -105,10 +102,7 @@ class PlanCard extends StatelessWidget {
                           plan.name,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: AppTextStyles.bold18(context, color: Colors.white),
                         ),
                       ),
                       Row(
@@ -117,7 +111,7 @@ class PlanCard extends StatelessWidget {
                           const SizedBox(width: 2),
                           Text(
                             plan.rating.toString(),
-                            style: const TextStyle(color: Colors.grey, fontSize: 13),
+                            style: AppTextStyles.regular13(context, color: Colors.grey),
                           ),
                         ],
                       ),
@@ -134,7 +128,7 @@ class PlanCard extends StatelessWidget {
                       const SizedBox(width: 4),
                       Text(
                         '${plan.durationWeeks} Weeks',
-                        style: const TextStyle(color: Colors.grey, fontSize: 13),
+                        style: AppTextStyles.regular13(context, color: Colors.grey),
                       ),
                       const SizedBox(width: 16),
                       const Icon(
@@ -145,7 +139,7 @@ class PlanCard extends StatelessWidget {
                       const SizedBox(width: 4),
                       Text(
                         '${plan.minutesPerDay} Min/Day',
-                        style: const TextStyle(color: Colors.grey, fontSize: 13),
+                        style: AppTextStyles.regular13(context, color: Colors.grey),
                       ),
                     ],
                   ),

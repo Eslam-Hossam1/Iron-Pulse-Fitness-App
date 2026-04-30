@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fitness_app/core/extensions/responsive_extension.dart';
+import 'package:fitness_app/core/theme/app_text_styles.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 
@@ -17,7 +17,7 @@ class ShowToast {
     timeInSecForIosWeb: seconds ?? 3,
     backgroundColor: Colors.red,
     textColor: Colors.white,
-    fontSize: 16.r(context),
+    fontSize: AppTextStyles.regular16(context).fontSize,
   );
 
   static void showToastSuccessTop({
@@ -31,6 +31,6 @@ class ShowToast {
     timeInSecForIosWeb: seconds ?? 3,
     backgroundColor: const Color(0xFF0D7FF2),
     textColor: Colors.white,
-    fontSize: 16.r(context),
+    fontSize: AppTextStyles.regular16(context).fontSize,
   );
 }

@@ -8,6 +8,7 @@ import 'package:fitness_app/features/auth/presentation/view_model/sign_up_cubit.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fitness_app/core/extensions/responsive_extension.dart';
+import 'package:fitness_app/core/theme/app_text_styles.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
@@ -42,7 +43,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
         backgroundColor: Colors.transparent,
         title: Text(
           'IronPulse',
-          style: TextStyle(fontSize: 22.r(context), fontWeight: FontWeight.bold),
+          style: AppTextStyles.bold22(context, color: Colors.white),
         ),
         centerTitle: true,
         leading: BackButton(onPressed: () => context.go(RoutePaths.login)),
@@ -172,11 +173,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
       padding: EdgeInsets.only(bottom: 2.h(context), top: 5.h(context)),
       child: Text(
         text,
-        style: TextStyle(
-          fontSize: 14.r(context),
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-        ),
+        style: AppTextStyles.bold14(context, color: Colors.white),
       ),
     );
   }
@@ -210,11 +207,7 @@ class SignUpWithGoogle extends StatelessWidget {
             SizedBox(width: 10.w(context)),
             Text(
               'Sign up with Google',
-              style: TextStyle(
-                fontSize: 16.r(context),
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
+              style: AppTextStyles.bold16(context, color: Colors.white),
             ),
           ],
         ),
@@ -233,17 +226,13 @@ class HaveAnAccount extends StatelessWidget {
       children: [
         Text(
           'Already have an account? ',
-          style: TextStyle(fontSize: 14.r(context), color: Colors.white54),
+          style: AppTextStyles.regular14(context, color: Colors.white54),
         ),
         GestureDetector(
           onTap: () => context.go(RoutePaths.login),
           child: Text(
             'Log in',
-            style: TextStyle(
-              fontSize: 14.r(context),
-              color: const Color(0xFF2563EB),
-              fontWeight: FontWeight.bold,
-            ),
+            style: AppTextStyles.bold14(context, color: const Color(0xFF2563EB)),
           ),
         ),
       ],
@@ -268,7 +257,7 @@ class DividerOR extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 12.w(context)),
           child: Text(
             'OR',
-            style: TextStyle(fontSize: 14.r(context), color: Colors.white38),
+            style: AppTextStyles.regular14(context, color: Colors.white38),
           ),
         ),
         Expanded(
@@ -298,14 +287,14 @@ class SignUpUpperPart extends StatelessWidget {
         Positioned(
           bottom: 35,
           left: 50,
-          child: Text('Join the Forge', style: TextStyle(fontSize: 36.r(context))),
+          child: Text('Join the Forge', style: AppTextStyles.bold36(context, color: Colors.white)),
         ),
         Positioned(
           bottom: 15,
           left: 15,
           child: Text(
             'Start your transformation journey today.',
-            style: TextStyle(fontSize: 16.r(context)),
+            style: AppTextStyles.regular16(context, color: Colors.white),
           ),
         ),
       ],

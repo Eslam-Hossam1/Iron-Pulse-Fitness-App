@@ -5,6 +5,7 @@ import 'package:fitness_app/features/plans/presentation/widgets/plan_details/chi
 import 'package:fitness_app/features/plans/presentation/widgets/plan_details/day_card.dart';
 import 'package:flutter/material.dart' hide Chip;
 import 'package:fitness_app/core/extensions/responsive_extension.dart';
+import 'package:fitness_app/core/theme/app_text_styles.dart';
 import 'package:go_router/go_router.dart';
 
 class PlanDetailsContent extends StatefulWidget {
@@ -104,15 +105,12 @@ class _PlanDetailsContentState extends State<PlanDetailsContent> {
                 SizedBox(height: 12.h(context)),
                 Text(
                   plan.name,
-                  style: TextStyle(
-                    fontSize: 26.r(context),
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: AppTextStyles.bold25(context, color: Colors.white),
                 ),
                 SizedBox(height: 8.h(context)),
                 Text(
                   plan.description,
-                  style: TextStyle(color: Colors.grey, fontSize: 14.r(context)),
+                  style: AppTextStyles.regular14(context, color: Colors.grey),
                 ),
                 SizedBox(height: 20.h(context)),
                 Row(
@@ -146,12 +144,9 @@ class _PlanDetailsContentState extends State<PlanDetailsContent> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
+                    Text(
                       'Week 1: Foundations',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: AppTextStyles.bold18(context, color: Colors.white),
                     ),
                     TextButton(
                       onPressed: () {},
