@@ -1,6 +1,6 @@
 import 'package:fitness_app/features/plans/data/models/plans_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fitness_app/core/extensions/responsive_extension.dart';
 
 class PlanCard extends StatelessWidget {
   const PlanCard({super.key, required this.plan, required this.onTap});
@@ -26,7 +26,7 @@ class PlanCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: Color(0xFF1E1E2E),
+          color: const Color(0xFF1E1E2E),
           borderRadius: BorderRadius.circular(16),
         ),
         child: Column(
@@ -35,7 +35,7 @@ class PlanCard extends StatelessWidget {
             Stack(
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+                  borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
                   child: Image.network(
                     plan.image,
                     height: 180,
@@ -45,7 +45,7 @@ class PlanCard extends StatelessWidget {
                       if (loadingProgress == null) return child;
                       return Container(
                         height: 180,
-                        color: Color(0xFF1E1E2E),
+                        color: const Color(0xFF1E1E2E),
                         child: Center(
                           child: CircularProgressIndicator(
                             value: loadingProgress.expectedTotalBytes != null
@@ -59,8 +59,8 @@ class PlanCard extends StatelessWidget {
                     errorBuilder: (context, error, stackTrace) {
                       return Container(
                         height: 180,
-                        color: Color(0xFF1E1E2E),
-                        child: Center(
+                        color: const Color(0xFF1E1E2E),
+                        child: const Center(
                           child: Icon(
                             Icons.image_not_supported_outlined,
                             color: Colors.grey,
@@ -75,14 +75,14 @@ class PlanCard extends StatelessWidget {
                   top: 12,
                   right: 12,
                   child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                     decoration: BoxDecoration(
                       color: _getLevelColor(plan.level),
                       borderRadius: BorderRadius.circular(6),
                     ),
                     child: Text(
                       plan.level.toUpperCase(),
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 11,
                         fontWeight: FontWeight.bold,
@@ -93,7 +93,7 @@ class PlanCard extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: EdgeInsets.all(12.dg),
+              padding: EdgeInsets.all(12.r(context)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -105,7 +105,7 @@ class PlanCard extends StatelessWidget {
                           plan.name,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
@@ -113,46 +113,46 @@ class PlanCard extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          Icon(Icons.star, size: 14, color: Colors.amber),
-                          SizedBox(width: 2),
+                          const Icon(Icons.star, size: 14, color: Colors.amber),
+                          const SizedBox(width: 2),
                           Text(
                             plan.rating.toString(),
-                            style: TextStyle(color: Colors.grey, fontSize: 13),
+                            style: const TextStyle(color: Colors.grey, fontSize: 13),
                           ),
                         ],
                       ),
                     ],
                   ),
-                  SizedBox(height: 8.h),
+                  SizedBox(height: 8.h(context)),
                   Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.calendar_today_outlined,
                         size: 14,
                         color: Colors.grey,
                       ),
-                      SizedBox(width: 4),
+                      const SizedBox(width: 4),
                       Text(
                         '${plan.durationWeeks} Weeks',
-                        style: TextStyle(color: Colors.grey, fontSize: 13),
+                        style: const TextStyle(color: Colors.grey, fontSize: 13),
                       ),
-                      SizedBox(width: 16),
-                      Icon(
+                      const SizedBox(width: 16),
+                      const Icon(
                         Icons.access_time_outlined,
                         size: 14,
                         color: Colors.grey,
                       ),
-                      SizedBox(width: 4),
+                      const SizedBox(width: 4),
                       Text(
                         '${plan.minutesPerDay} Min/Day',
-                        style: TextStyle(color: Colors.grey, fontSize: 13),
+                        style: const TextStyle(color: Colors.grey, fontSize: 13),
                       ),
                     ],
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 10.h),
+            SizedBox(height: 10.h(context)),
           ],
         ),
       ),

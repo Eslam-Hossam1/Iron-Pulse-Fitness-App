@@ -4,7 +4,7 @@ import 'package:fitness_app/features/plans/data/models/plan_details_model.dart';
 import 'package:fitness_app/features/plans/presentation/widgets/plan_details/chip_and_stat_item.dart';
 import 'package:fitness_app/features/plans/presentation/widgets/plan_details/day_card.dart';
 import 'package:flutter/material.dart' hide Chip;
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fitness_app/core/extensions/responsive_extension.dart';
 import 'package:go_router/go_router.dart';
 
 class PlanDetailsContent extends StatefulWidget {
@@ -27,7 +27,7 @@ class _PlanDetailsContentState extends State<PlanDetailsContent> {
     return CustomScrollView(
       slivers: [
         SliverAppBar(
-          expandedHeight: 260.h,
+          expandedHeight: 260.h(context),
           pinned: true,
           backgroundColor: const Color(0xFF0F172A),
           foregroundColor: Colors.white,
@@ -76,14 +76,14 @@ class _PlanDetailsContentState extends State<PlanDetailsContent> {
         ),
         SliverToBoxAdapter(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 20.h),
+            padding: EdgeInsets.symmetric(horizontal: 10.w(context), vertical: 20.h(context)),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
                     Chip(label: plan.level.toUpperCase(), color: Colors.blue),
-                    SizedBox(width: 8.w),
+                    SizedBox(width: 8.w(context)),
                     Chip(
                       label: '${plan.durationWeeks} WEEKS',
                       color: const Color(0xFF1E1E2E),
@@ -101,20 +101,20 @@ class _PlanDetailsContentState extends State<PlanDetailsContent> {
                     ),
                   ],
                 ),
-                SizedBox(height: 12.h),
+                SizedBox(height: 12.h(context)),
                 Text(
                   plan.name,
                   style: TextStyle(
-                    fontSize: 26.sp,
+                    fontSize: 26.r(context),
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 8.h),
+                SizedBox(height: 8.h(context)),
                 Text(
                   plan.description,
-                  style: TextStyle(color: Colors.grey, fontSize: 14.sp),
+                  style: TextStyle(color: Colors.grey, fontSize: 14.r(context)),
                 ),
-                SizedBox(height: 20.h),
+                SizedBox(height: 20.h(context)),
                 Row(
                   children: [
                     Expanded(
@@ -124,7 +124,7 @@ class _PlanDetailsContentState extends State<PlanDetailsContent> {
                         value: widget.planDetails.durationRange,
                       ),
                     ),
-                    SizedBox(width: 8.w),
+                    SizedBox(width: 8.w(context)),
                     Expanded(
                       child: StatItem(
                         icon: Icons.fitness_center,
@@ -132,7 +132,7 @@ class _PlanDetailsContentState extends State<PlanDetailsContent> {
                         value: widget.planDetails.frequency,
                       ),
                     ),
-                    SizedBox(width: 8.w),
+                    SizedBox(width: 8.w(context)),
                     Expanded(
                       child: StatItem(
                         icon: Icons.local_fire_department_outlined,
@@ -142,7 +142,7 @@ class _PlanDetailsContentState extends State<PlanDetailsContent> {
                     ),
                   ],
                 ),
-                SizedBox(height: 24.h),
+                SizedBox(height: 24.h(context)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -159,7 +159,7 @@ class _PlanDetailsContentState extends State<PlanDetailsContent> {
                     ),
                   ],
                 ),
-                SizedBox(height: 12.h),
+                SizedBox(height: 12.h(context)),
                 ...firstWeek.entries.map((entry) {
                   final day = entry.key;
                   final workouts = entry.value;
