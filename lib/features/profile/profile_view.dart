@@ -3,6 +3,7 @@ import 'package:fitness_app/core/services/edit_image_profile_servise/get_image_u
 import 'package:fitness_app/features/profile/presentation/views/edit_profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:fitness_app/core/utils/assets.dart';
+import 'package:fitness_app/core/widgets/custom_cached_network_image.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -70,32 +71,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           currentImageUrl = snapshot.data;
                           controller.loadUser();
                           final imageUrl = snapshot.data;
-                          if (imageUrl == null) {
-                            return Container(
-                              width: 120.r(context),
-                              height: 120.r(context),
-                              decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Color(0xff151F29),
-                              ),
-                              child: ClipOval(
-                                child: Image.asset(
-                                  Assets.imagesPngsDefaultProfile,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            );
-                          }
+                          
+                          final double size = 120.r(context);
+
                           return Container(
-                            width: 120.r(context),
-                            height: 120.r(context),
-                            decoration: BoxDecoration(
+                            width: size,
+                            height: size,
+                            decoration: const BoxDecoration(
                               shape: BoxShape.circle,
-                              color: const Color(0xff151F29),
-                              image: DecorationImage(
-                                image: NetworkImage(snapshot.data!),
-                                fit: BoxFit.cover,
-                              ),
+                              color: Color(0xff151F29),
+                            ),
+                            child: ClipOval(
+                              child: imageUrl == null
+                                  ? Image.asset(
+                                      Assets.imagesPngsDefaultProfile,
+                                      fit: BoxFit.cover,
+                                    )
+                                  : CustomCachedNetworkImage(
+                                      url: imageUrl,
+                                      fit: BoxFit.cover,
+                                      // Optimize memory usage
+                                      memCacheWidth: size.toInt(),
+                                      memCacheHeight: size.toInt(),
+                                    ),
                             ),
                           );
                         },
