@@ -32,10 +32,10 @@ class OnboardingView extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: darkBackground,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.clear_outlined, color: Colors.white),
-          onPressed: () => _finishOnboarding(context),
-        ),
+        // leading: IconButton(
+        //   icon: const Icon(Icons.clear_outlined, color: Colors.white),
+        //   onPressed: () => _finishOnboarding(context),
+        // ),
         title: const Text(
           'IronPulse',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
@@ -48,8 +48,8 @@ class OnboardingView extends StatelessWidget {
             Expanded(
               flex: 3,
               child: Image.asset(
-                Assets.imagesPngsOnboardingManRunning, 
-                fit: BoxFit.contain,
+                Assets.imagesPngsOnboardingManRunning,
+                fit: BoxFit.fill,
                 width: double.infinity,
               ),
             ),
@@ -81,8 +81,8 @@ class OnboardingView extends StatelessWidget {
                         height: 1.5,
                       ),
                     ),
-                    
-                    const Spacer(), 
+
+                    const Spacer(),
 
                     SizedBox(
                       width: double.infinity,
