@@ -182,7 +182,7 @@ flowchart TD
     <td align="center">
       <b>Mohammad Ashraf</b><br/>
       <sub>Flutter Developer</sub><br/><br/>
-       <a href="https://www.linkedin.com/">
+       <a href="https://www.linkedin.com/in/mohamed-ashraf-4b46583a7/">
         <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white"/>
     </td>
     <td align="center">
