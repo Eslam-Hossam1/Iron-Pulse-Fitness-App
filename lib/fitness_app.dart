@@ -18,7 +18,7 @@ class FitnessApp extends StatelessWidget {
             routerConfig: AppRouter.router,
             theme: AppThemes.lightTheme,
             darkTheme: AppThemes.darkTheme,
-            themeMode: ThemeMode.dark,
+            themeMode: mode,
           );
         },
       ),
