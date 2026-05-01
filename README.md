@@ -81,15 +81,15 @@ Iron Pulse is built following **MVVM Architecture** principles with a strict **f
 ```
 lib/
 ├── core/
-│   ├── networking/
-│   ├── errors/
+│   ├── services/
 │   ├── widgets/
 │   ├── theme/
-│   ├── services/
 │   ├── helpers/
 │   ├── extensions/
 │   └── errors/
 │   └── utils/
+│   └── di/
+│   ├── errors/
 │   └── config/
 │
 └── features/
