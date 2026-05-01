@@ -59,10 +59,10 @@ Iron Pulse is your all-in-one fitness ecosystem designed to push your limits. Wh
 </tr>
 
 <tr>
-  <td><img width="200" alt="Favorites Screen" src="./assets/app_screens/favorites.png" /></td>
+  <td><img width="200" alt="Favorites Screen" src="./assets/app_screens/Favorites.png" /></td>
   <td><img width="200" alt="Favorites Empty" src="./assets/app_screens/favorites%20empty.png" /></td>
   <td><img width="200" alt="Profile Screen" src="./assets/app_screens/profile.png" /></td>
-  <td><img width="200" alt="Edit Profile" src="./assets/app_screens/edit%20profile.png" /></td>
+  <td><img width="200" alt="Edit Profile" src="./assets/app_screens/Edit%20Profile.png" /></td>
 </tr>
 <tr>
   <td align="center">Favorites Screen</td>
@@ -75,12 +75,8 @@ Iron Pulse is your all-in-one fitness ecosystem designed to push your limits. Wh
 ---
 
 # 🏛️ Architecture & Modularization
-<p align="center">
-  <img width="100%" alt="Modular Architecture" src="assets/images/readme/iron_pulse_architecture.png" />
-</p>
 
-
-Iron Pulse is built following **Clean Architecture** principles with a strict **feature-first** folder structure. Each feature is fully isolated with its own `domain`, `data`, and `presentation` layers.
+Iron Pulse is built following **MVVM Architecture** principles with a strict **feature-first** folder structure. Each feature is fully isolated with its own `domain`, `data`, and `presentation` layers.
 
 ```
 lib/
@@ -145,13 +141,13 @@ flowchart TD
 | :--- | :--- |
 | **Language** | Dart |
 | **Framework** | Flutter |
-| **Architecture** | Clean Architecture, Feature-First |
+| **Architecture** | MVVM Architecture |
 | **State Management** | flutter_bloc (Cubit) |
 | **Navigation** | go_router |
 | **Backend / BaaS** | Supabase |
 | **Dependency Injection** | get_it |
 | **Error Handling** | dartz (Either) |
-| **Local Storage** | flutter_secure_storage, hydrated_bloc |
+| **Local Storage** | shared_preferences, hydrated_bloc |
 | **Image Loading** | cached_network_image |
 | **SVG Support** | flutter_svg |
 | **Splash Screen** | flutter_native_splash |
