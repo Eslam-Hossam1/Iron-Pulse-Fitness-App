@@ -33,10 +33,10 @@ Iron Pulse is your all-in-one fitness ecosystem designed to push your limits. Wh
 
 <table>
 <tr>
-  <td><img width="200" alt="Splash Screen" src="assets/app_screens/splash.png" /></td>
-  <td><img width="200" alt="Onboarding" src="assets/app_screens/onboarding.png" /></td>
-  <td><img width="200" alt="Login Screen" src="assets/app_screens/login.png" /></td>
-  <td><img width="200" alt="Sign Up Screen" src="assets/app_screens/sign%20up.png" /></td>
+  <td><img width="200" alt="Splash Screen" src="./assets/app_screens/splash.png" /></td>
+  <td><img width="200" alt="Onboarding" src="./assets/app_screens/onboarding.png" /></td>
+  <td><img width="200" alt="Login Screen" src="./assets/app_screens/login.png" /></td>
+  <td><img width="200" alt="Sign Up Screen" src="./assets/app_screens/sign%20up.png" /></td>
 </tr>
 <tr>
   <td align="center">Splash Screen</td>
@@ -46,10 +46,10 @@ Iron Pulse is your all-in-one fitness ecosystem designed to push your limits. Wh
 </tr>
 
 <tr>
-  <td><img width="200" alt="Home Screen" src="assets/app_screens/home.png" /></td>
-  <td><img width="200" alt="Plans Screen" src="assets/app_screens/plans.png" /></td>
-  <td><img width="200" alt="Plan Details" src="assets/app_screens/plan%20details.png" /></td>
-  <td><img width="200" alt="Trainers Screen" src="assets/app_screens/trainers.png" /></td>
+  <td><img width="200" alt="Home Screen" src="./assets/app_screens/home.png" /></td>
+  <td><img width="200" alt="Plans Screen" src="./assets/app_screens/plans.png" /></td>
+  <td><img width="200" alt="Plan Details" src="./assets/app_screens/plan%20details.png" /></td>
+  <td><img width="200" alt="Trainers Screen" src="./assets/app_screens/trainers.png" /></td>
 </tr>
 <tr>
   <td align="center">Home Screen</td>
@@ -59,10 +59,10 @@ Iron Pulse is your all-in-one fitness ecosystem designed to push your limits. Wh
 </tr>
 
 <tr>
-  <td><img width="200" alt="Favorites Screen" src="assets/app_screens/favorites.png" /></td>
-  <td><img width="200" alt="Favorites Empty" src="assets/app_screens/favorites%20empty.png" /></td>
-  <td><img width="200" alt="Profile Screen" src="assets/app_screens/profile.png" /></td>
-  <td><img width="200" alt="Edit Profile" src="assets/app_screens/edit%20profile.png" /></td>
+  <td><img width="200" alt="Favorites Screen" src="./assets/app_screens/favorites.png" /></td>
+  <td><img width="200" alt="Favorites Empty" src="./assets/app_screens/favorites%20empty.png" /></td>
+  <td><img width="200" alt="Profile Screen" src="./assets/app_screens/profile.png" /></td>
+  <td><img width="200" alt="Edit Profile" src="./assets/app_screens/edit%20profile.png" /></td>
 </tr>
 <tr>
   <td align="center">Favorites Screen</td>
